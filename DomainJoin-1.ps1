@@ -1,3 +1,8 @@
+#created by Carlton Whitmore
+#This script creates a computer account and adds to the proper Direct Access Client group
+#You can run this script from your any Windows system that has access to PSD/MDT server and Domain controller
+
+
 Param(
     [string]$NewComputer = $(Read-Host "Enter New computer name")
 )
