@@ -12,7 +12,7 @@ Param(
 $UpdatedComputer = $NewComputer + "$"
 $ComputerFile = $NewComputer + ".txt"
 $MDTServer = "NAMEofYOurPSDServer"
-$MDTShare = "Set PSD/MDT share folder" #mine was c:\PSDeployment
+$MDTShare = "Set PSD/MDT share folder" #mine was PSDeployment
 $DomainController = "DomainControllerName"
 $DirectServer = "Direct Access Server Name" 
 $Domain = "YourActiveDirectoryDomainName"
@@ -31,7 +31,7 @@ Invoke-Command -ComputerName $MDTServer -ScriptBlock {
 #creates local directory and runs domain join command
         New-Item -ItemType directory -Path "c:\OfflineJoinDomain" -ErrorAction SilentlyContinue
         cmd /c Djoin.exe /provision /domain $Domain /dcname $DomainController /machine $NewComputer /policynames "DirectAccess Client Settings" /rootcacerts /savefile "c:\OfflineJoinDomain\$ComputerFile" /reuse
-        Copy-Item "c:\offlineJoinDomain\$ComputerFile" -Destination "\\$MDTServer\$MDTShare\OfflineJoinDomain\$ComputerFile"  
+        Copy-Item c:\offlineJoinDomain\$ComputerFile -Destination \\$MDTServer\c$\$MDTShare\OfflineJoinDomain\ -Recurse -force
 
 #waits 6 seconds then adds computer to necessary group for DirectAccess
 Start-Sleep 6
